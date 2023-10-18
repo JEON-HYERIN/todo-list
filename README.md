@@ -9,7 +9,7 @@ null : 자연적으로 발생하지 않음, 값이 없음을 의도적으로 표
 undefined : 변수는 선언되었으나 값이 아직 주어지지 않음
 
 배열
-값을 리스트로 정리하는 것 
+값을 리스트로 정리하는 것
 목적: 하나의 변수 안에 데이터의 리스트를 가지는 것
 ex ) 구매리스트
 push --> 배열 항목 추가
@@ -51,7 +51,7 @@ sayHello() 라는 펑션을 1초마다 반복한다는 의미.
 setTimeout(sayHello, 1000);
 1초 기다렸다가 한번만 실행.
 padStart() -> string이 가져야하는 길이, 그렇지 않다면 앞쪽에 채워넣을 값
-date 생성자 함수에서 가져온 시간들은 number 타입이므로  string으로 변환한 뒤 padStart 적용해야함
+date 생성자 함수에서 가져온 시간들은 number 타입이므로 string으로 변환한 뒤 padStart 적용해야함
 
 parentNode = parentElement
 누가 그 button의 부모이냐
@@ -61,6 +61,12 @@ JSON.stringify
 
 forEach
 array에 있는 각각의 item에 대해 함수 실행해줌
+
+filter 함수
+지우고 싶은 아이템을 "제외"하고 새 배열을 만듦
+
+parseInt 함수
+문자열을 파싱하여 숫자로 변환
 
 innerText와 innerHTML은 JavaScript에서 HTML 요소의 내용을 가지고 오거나 변경할 때 사용하는 두 가지 방법입니다. 두 속성이 비슷해 보일 수 있지만 중요한 차이점이 있습니다.
 
