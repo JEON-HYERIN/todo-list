@@ -1,6 +1,6 @@
-const toDoForm = document.querySelector('.todo-form');
-const toDoInput = document.querySelector('.todo-form input');
-const toDoList = document.querySelector('.todo-list');
+const toDoForm = document.querySelector('.to-do-form');
+const toDoInput = document.querySelector('.to-do-form input');
+const toDoList = document.querySelector('.to-do-list');
 
 const TODOS_KEY = 'todos';
 
@@ -44,6 +44,7 @@ function handleToDoSubmit(event) {
     }
     // 텍스트(newTodo)를 toDos array에 푸쉬
     toDos.push(newTodoObj);
+    console.log(newTodoObj)
     // 그 다음 화면에 toDos를 그려줌 
     paintToDo(newTodoObj);
     // toDos들을 저장

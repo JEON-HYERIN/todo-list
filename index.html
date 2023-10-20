@@ -1,29 +1,40 @@
 <!DOCTYPE html>
 <html lang="ko">
 	<head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Momentum</title>
-	<link rel="stylesheet" href="./css/style.css" />
-</head>
-<body>
-	<h1 class="blind">나만의 투두리스트</h1>
-	<!-- Login -->
-	<div class="login">
-		<h2 class="blind">로그인 영역</h2>
-		<form class="login-form">
-			<input type="text" class="login-input" placeholder="이름을 입력하세요." maxlength="15" required />
-			<button class="login-btn">로그인</button>
-		</form>
-		<p class="user-name invisible"></p>
-	</div>
-	<!-- To Do List -->
-	<form class="to-do-form">
-		<input type="text" class="to-do-input" placeholder="오늘 할일은?" required />
-	</form>
-	<ul class="to-do-list"></ul>
-
-	<script src="./js/login.js"></script>
-	<script src="./js/to-do-list.js"></script>
-</body>
-</html>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>TO DO LIST</title>
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+		integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<!-- CSS -->
+		<link rel="stylesheet" href="./css/style.css" />
+	</head>
+	<body>
+		<div class="wrapper">
+			<h1 class="title">To Do List</h1>
+			<div class="content">
+				<!-- Login -->
+				<div class="login">
+					<form class="login-form">
+						<input type="text" class="login-input" placeholder="Enter your name." maxlength="15" required />
+						<button class="btn login-btn">Login</button>
+					</form>
+				</div>
+				<!-- To Do List -->
+				<div class="todo">
+					<form class="todo-form">
+						<input type="text" class="todo-input" placeholder="What do you need to do today?" required />
+						<button class="btn todo-btn">Add</button>
+					</form>
+					<ul class="todo-list"></ul>
+				</div>
+			</div>
+		</div>
+		
+		<!-- JS -->
+		<script defer src="./js/login.js"></script>
+		<script defer src="./js/todo-list.js"></script>
+	</body>
+	</html>
