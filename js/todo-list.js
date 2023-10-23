@@ -1,48 +1,51 @@
-const toDoForm = document.querySelector('.todo-form');
-const toDoInput = document.querySelector('.todo-input');
-const toDoList = document.querySelector('.todo-list');
+const todoForm = document.querySelector('.todo-form');
+const todo = document.querySelector('.todo-input');
+const todoList = document.querySelector('.todo-list');
 
-let toDos = [];
+let todos = []; // 추후에 값을 재할당 할 것이므로 let 사용
 
-function writeToDo(e) {
-    // 기본동작 방지
-    e.preventDefault();
-    const toDoValue = toDoInput.value;
-    // 텍스트 창 초기화
-    toDoInput.value = '';
-    toDos.push(toDoValue);
-    localStorage.setItem('할일', JSON.stringify(toDos));
-    showToDo(toDoValue);
+function createTodo(event) {
+    event.preventDefault(); // 기본동작 방지
+    const todoText = todo.value;
+    todo.value = ''; // 입력 필드 초기화
+    todos.push(todoText); // 입력받은 값을 todos 배열에 추가
+    localStorage.setItem('todos', JSON.stringify(todos)); // 로컬 스토리지에 저장
+    paintTodo(todoText); // 입력한 투두 리스트를 화면에 보여주는 함수 실행
 }
 
-function showToDo(toDo) {
+function paintTodo(todo) {
     const li = document.createElement('li');
     const label = document.createElement('label');
     const input = document.createElement('input');
     const span = document.createElement('span');
     const button = document.createElement('button');
-    toDoList.appendChild(li);
-    li.appendChild(label);
-    label.appendChild(input);
+
+    todoList.appendChild(li); // todo-list에 자식 요소로 li 추가(맨 뒤에 추가됨)
+    li.appendChild(label); // li에 자식 요소로 label 추가
+
+    label.appendChild(input); // label에 자식 요소로 label 추가
     input.setAttribute('type', 'checkbox');
-    span.textContent = toDo;
-    label.appendChild(span);
-    li.appendChild(button);
-    // 폰트어썸 아이콘 적용에 필요한 클래스 추가
-    button.setAttribute('class', 'fa-solid fa-x');
-    button.addEventListener('click', deleteToDo);
+
+    label.appendChild(span); // label에 자식 요소로 span 추가
+    span.innerText = todo;
+
+    li.appendChild(button); // li에 자식 요소로 button 추가
+    button.setAttribute('class', 'fa-solid fa-x'); // 폰트어썸 아이콘 적용에 필요한 클래스 추가
+    button.addEventListener('click', removeTodo);
 }
 
-function deleteToDo(e) {
-    const li = e.target.parentElement;
-    li.remove();
+function removeTodo(event) {
+    const li = event.target.parentElement;
+    li.remove(); // 클릭한 li 삭제
 }
-toDoForm.addEventListener('submit', writeToDo);
 
-const savedToDos = localStorage.getItem('할일');
+todoForm.addEventListener('submit', createTodo);
 
-if(savedToDos !== null) {
-    const paresdToDos = JSON.parse(savedToDos);
-    toDos = paresdToDos;
-    paresdToDos.forEach(showToDo);
+const savedTodos = localStorage.getItem('todos'); // todo 값 저장하는 변수
+
+// 이미 저장된 todos 값이 있다면
+if(savedTodos !== null) {
+    const paresdTodos = JSON.parse(savedTodos); // 문자열로 저장된 데이터를 기존의 원본 데이터로 변환
+    todos = paresdTodos; // 기존에 저장되어 있던 값을 todos 배열에 추가
+    paresdTodos.forEach(paintTodo); // 배열 반복문 실행해서 화면에 출력
 }

@@ -1,6 +1,5 @@
 /* fonts */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
-
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
 
 /* reset */
@@ -75,6 +74,7 @@ body {
 	color: #405189;
 }
 
+/* login */
 .login {
 	display: flex;
 	justify-content: flex-end;
@@ -114,6 +114,7 @@ body {
 	font-weight: 500;
 }
 
+/* todo */
 .todo-form {
 	display: flex;
 	margin-bottom: 24px;
@@ -159,7 +160,7 @@ body {
 }
 
 .todo-list li+li {
-	border-top: 1px solid #f3f3f3;
+	border-top: 1px solid #e5e4e4;
 }
 
 .todo-list input:checked+span {
@@ -207,5 +208,6 @@ body {
 }
 
 .todo-list button {
+	font-size: 14px;
 	color: #405189;
 }
