@@ -109,9 +109,14 @@ body {
 	background-color: #dcdcdf;
 }
 
-.login h2 {
+.login-title {
+	display: none;
 	font-size: 14px;
 	font-weight: 500;
+}
+
+.is-active .login-title {
+	display: block;
 }
 
 /* todo */

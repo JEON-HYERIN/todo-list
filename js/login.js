@@ -1,6 +1,7 @@
 const login = document.querySelector('.login');
 const loginForm = document.querySelector('.login-form');
 const loginInput = document.querySelector('.login-input');
+const loginTitle = document.querySelector('.login-title');
 
 function onLogin(event) {
 	event.preventDefault(); // 기본동작 방지
@@ -10,9 +11,7 @@ function onLogin(event) {
 }
 
 function paintUserName(userName) {
-	const h2 = document.createElement('h2');
-	login.appendChild(h2);
-	h2.innerText = `하이루 ${userName}😀`;
+	loginTitle.innerText = `하이루 ${userName}😀`;
 	login.classList.add('is-active'); // 사용자 이름이 보여지면 form 요소는 화면에서 안 보이도록 하기 위해 클래스 추가
 }
 
