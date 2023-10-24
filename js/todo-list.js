@@ -8,12 +8,17 @@ function createTodo(event) {
     event.preventDefault(); // 기본동작 방지
     const todoText = todo.value;
     todo.value = ''; // 입력 필드 초기화
-    todos.push(todoText); // 입력받은 값을 todos 배열에 추가
+    const todosObj = {
+        id: Date.now(),
+        text: todoText,
+        checked: false
+    };
+    todos.push(todosObj); // 입력받은 값을 todos 배열에 추가
     localStorage.setItem('todos', JSON.stringify(todos)); // 로컬 스토리지에 저장
-    paintTodo(todoText); // 입력한 투두 리스트를 화면에 보여주는 함수 실행
+    paintTodo(todosObj); // 입력한 투두 리스트를 화면에 보여주는 함수 실행
 }
 
-function paintTodo(todo) {
+function paintTodo(todo, index) {
     const li = document.createElement('li');
     const label = document.createElement('label');
     const input = document.createElement('input');
@@ -21,14 +26,21 @@ function paintTodo(todo) {
     const button = document.createElement('button');
 
     todoList.appendChild(li); // todo-list에 자식 요소로 li 추가(맨 뒤에 추가됨)
+    li.id = todo.id;
     li.appendChild(label); // li에 자식 요소로 label 추가
-
     label.appendChild(input); // label에 자식 요소로 label 추가
     input.setAttribute('type', 'checkbox');
-
+    input.addEventListener('change', function() {
+        todo.checked = !todo.checked;
+        localStorage.setItem('todos', JSON.stringify(todos));
+    });
+    if(todo.checked === true) {
+        input.setAttribute('checked', 'checked');
+    } else {
+        input.removeAttribute('checked');
+    }
     label.appendChild(span); // label에 자식 요소로 span 추가
-    span.innerText = todo;
-
+    span.innerText = todo.text;
     li.appendChild(button); // li에 자식 요소로 button 추가
     button.setAttribute('class', 'fa-solid fa-x'); // 폰트어썸 아이콘 적용에 필요한 클래스 추가
     button.addEventListener('click', removeTodo);
@@ -37,6 +49,9 @@ function paintTodo(todo) {
 function removeTodo(event) {
     const li = event.target.parentElement;
     li.remove(); // 클릭한 li 삭제
+    const newTodo = todos.filter((todo) => todo.id !== parseInt(li.id));
+    todos = newTodo;
+    localStorage.setItem('todos', JSON.stringify(todos));
 }
 
 todoForm.addEventListener('submit', createTodo);
