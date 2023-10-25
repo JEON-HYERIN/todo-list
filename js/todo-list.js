@@ -58,7 +58,7 @@ todoForm.addEventListener('submit', createTodo);
 
 const savedTodos = localStorage.getItem('todos'); // todos 값 저장하는 변수
 
-// 이미 저장된 todos 값이 있다면 해당 조건문 실행
+// 로컬 스토리지에 저장되어 있는 값이 있다면 해당 조건문 실행
 if (savedTodos !== null) {
 	const paresdTodos = JSON.parse(savedTodos); // 문자열로 저장된 데이터를 기존의 원본 데이터로 변환
 	todos = paresdTodos; // 기존에 저장되어 있던 값을 todos 배열에 추가

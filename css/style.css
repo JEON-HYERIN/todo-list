@@ -183,7 +183,7 @@ body {
 	top: 0;
 	left: 0;
 	opacity: 0;
-	visibility: hidden;
+	pointer-events: none;
 }
 
 .todo-list li span {
@@ -210,6 +210,10 @@ body {
 	font-family: "Font Awesome 5 Free";
 	font-weight: 900;
 	color: #405189;
+}
+
+.todo-list input:focus+span::before {
+	outline: 2px solid #000;
 }
 
 .todo-list button {

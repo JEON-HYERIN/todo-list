@@ -17,9 +17,9 @@ function paintUserName(userName) {
 
 const savedUserName = localStorage.getItem('userName'); // 사용자 이름 저장하는 변수
 
-// 이미 저장된 값이 없다면
+// 로컬 스토리지에 저장되어 있는 값이 없다면 해당 조건문 실행
 if (savedUserName === null) {
-	loginForm.addEventListener('submit', onLogin); //login 함수 실행
+	loginForm.addEventListener('submit', onLogin); // login 함수 실행
 } else {
-	paintUserName(savedUserName); //저장된 값 화면에 보여주는 함수 실행
+	paintUserName(savedUserName); // 저장된 값 화면에 보여주는 함수 실행
 }
