@@ -30,6 +30,10 @@ input:focus {
 	outline: none;
 }
 
+input:focus-visible {
+	outline: 2px solid #000;
+}
+
 input::placeholder {
 	color: inherit;
 	font-family: inherit;
@@ -178,7 +182,7 @@ body {
 	cursor: pointer;
 }
 
-.todo-list input {
+.todo-list input[type="checkbox"] {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -205,14 +209,14 @@ body {
 	cursor: pointer;
 }
 
-.todo-list input:checked+span::before {
+.todo-list input[type="checkbox"]:checked+span::before {
 	content: "\f00c";
 	font-family: "Font Awesome 5 Free";
 	font-weight: 900;
 	color: #405189;
 }
 
-.todo-list input:focus-visible+span::before {
+.todo-list input[type="checkbox"]:focus-visible+span::before {
 	outline: 2px solid #000;
 }
 

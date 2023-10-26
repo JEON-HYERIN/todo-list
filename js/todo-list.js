@@ -34,7 +34,7 @@ function paintTodo(todo) {
 	li.appendChild(label);
 	label.appendChild(checkbox);
 	checkbox.setAttribute('type', 'checkbox');
-	checkbox.addEventListener('change', function () {
+	checkbox.addEventListener('click', function () {
 		todo.completed = !todo.completed; // true <-> false 토글 가능하도록 NOT 연산자 사용
 		saveTodo(); // 로컬 스토리지에 저장
 	});
