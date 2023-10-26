@@ -20,21 +20,6 @@ button {
 	color: inherit;
 }
 
-input {
-	background-color: transparent;
-	border: none;
-	color: inherit;
-}
-
-input:focus {
-	outline: none;
-}
-
-input::placeholder {
-	color: inherit;
-	font-family: inherit;
-}
-
 body {
 	font-family: 'Noto Sans KR', sans-serif;
 	font-weight: 400;
@@ -44,7 +29,7 @@ body {
 
 /* common */
 .invisible {
-	display: none;
+	display: none !important;
 }
 
 .btn {
@@ -74,51 +59,6 @@ body {
 	color: #405189;
 }
 
-/* login */
-.login {
-	display: flex;
-	justify-content: flex-end;
-	padding-bottom: 30px;
-}
-
-.is-active .login-form {
-	display: none;
-}
-
-.login-input {
-	width: 120px;
-	padding: 4px;
-	font-size: 12px;
-	border-bottom: 1px solid #ccc;
-}
-
-.login-input::placeholder {
-	color: #7e7676;
-}
-
-.login-btn {
-	padding: 4px 6px;
-	transition: .15s ease-in-out;
-	font-size: 11px;
-	color: #3b3b3b;
-	border-radius: 2px;
-	background-color: #e5e5ed;
-}
-
-.login-btn:hover {
-	background-color: #dcdcdf;
-}
-
-.login-title {
-	display: none;
-	font-size: 14px;
-	font-weight: 500;
-}
-
-.is-active .login-title {
-	display: block;
-}
-
 /* todo */
 .todo-form {
 	display: flex;
@@ -129,15 +69,19 @@ body {
 	width: 520px;
 	padding: 12px 10px;
 	transition: .15s ease-in-out;
-	border: 1px solid #ced4da;
+	color: inherit;
 	border-radius: 2px;
+	border: 1px solid #ced4da;
+	background-color: transparent;
 }
 
 .todo-input::placeholder {
+	font-family: inherit;
 	color: #6c757d;
 }
 
 .todo-input:focus {
+	outline: none;
 	border-color: #80bdff;
 	box-shadow: 0 0 0 1px rgba(0, 123, 255, .25);
 }
@@ -219,4 +163,14 @@ body {
 .todo-list button {
 	font-size: 14px;
 	color: #405189;
+}
+
+.todo-list button + button {
+	margin-left: 8px;
+}
+
+.todo-info-area {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
