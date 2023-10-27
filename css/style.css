@@ -32,6 +32,15 @@ body {
 	display: none !important;
 }
 
+.blind {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	clip: rect(0, 0, 0, 0);
+	overflow: hidden;
+}
+
 .btn {
 	font-family: 'Montserrat', sans-serif;
 	font-weight: 500;
@@ -101,14 +110,14 @@ body {
 	border-color: #0062cc;
 }
 
-.todo-list li {
+.todo-item {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	padding: 10px 0;
 }
 
-.todo-list li+li {
+.todo-item + .todo-item {
 	border-top: 1px solid #e5e4e4;
 }
 
@@ -130,12 +139,12 @@ body {
 	pointer-events: none;
 }
 
-.todo-list li span {
+.todo-list input[type="checkbox"] + span {
 	position: relative;
 	padding-left: 32px;
 }
 
-.todo-list li span::before {
+.todo-list input[type="checkbox"] + span::before {
 	content: '';
 	position: absolute;
 	top: 50%;
@@ -149,14 +158,14 @@ body {
 	cursor: pointer;
 }
 
-.todo-list input[type="checkbox"]:checked+span::before {
+.todo-list input[type="checkbox"]:checked + span::before {
 	content: "\f00c";
 	font-family: "Font Awesome 5 Free";
 	font-weight: 900;
 	color: #405189;
 }
 
-.todo-list input[type="checkbox"]:focus-visible+span::before {
+.todo-list input[type="checkbox"]:focus-visible + span::before {
 	outline: 2px solid #000;
 }
 

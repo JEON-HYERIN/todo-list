@@ -8,18 +8,14 @@ const setElements = function() {
 	if(!!els.section) {
 		els.todoForm = els.section.querySelector('.todo-form');
 		els.todoInput = els.section.querySelector('.todo-input');
-		els.todoListWrap = els.section.querySelector('.todo-list');
+		els.todoList = els.section.querySelector('.todo-list');
 		els.todoBtn = els.section.querySelector('.todo-btn');
 		els.todoInfoArea = els.section.querySelector('.todo-info-area');
 		els.todoInfo = els.section.querySelector('.todo-info');
-		els.todoLength = els.section.querySelector('.todo-length');
+		els.todoLength = els.section.querySelector('.todo-total');
 		els.todoClearBtn = els.section.querySelector('.todo-clear-btn');
 	}
 }; 
-
-const saveTodo = function() {
-	localStorage.setItem('할 일', JSON.stringify(todosArr));
-};
 
 const bindEvents = function() {
 	window.addEventListener('load', handlerList.informTodo); // 로드되면 리스트 개수 확인해서 화면에 보여주기 위한 이벤트
@@ -31,6 +27,9 @@ const handlerList = {
 	informTodo: function() {
 		els.todoLength.innerText = todosArr.length;
 	},
+	saveTodo: function() {
+		localStorage.setItem('할 일', JSON.stringify(todosArr));
+	}, 
 	createTodo: function(e) {
 		e.preventDefault();
 		const todoText = els.todoInput.value;
@@ -43,60 +42,77 @@ const handlerList = {
 		els.todoInput.value = ''; // 입력 필드 초기화
 
 		todosArr.push(todosObj); // 입력받은 값을 todosArr 배열에 추가
-		saveTodo(); // 로컬 스토리지에 저장
+		handlerList.saveTodo(); // 로컬 스토리지에 저장
 		handlerList.paintTodo(todosObj); // 입력한 투두 리스트를 화면에 보여주는 함수 실행
 		handlerList.informTodo();
 	},
 	paintTodo: function(todo) {
-		const li = document.createElement('li');
+		const todoItem = document.createElement('li');
+		todoItem.setAttribute('class', 'todo-item');
+		todoItem.setAttribute('data-id', todo.id);
+		els.todoList.appendChild(todoItem);
+
 		const label = document.createElement('label');
+		todoItem.appendChild(label);
+		
 		const checkbox = document.createElement('input');
-		const span = document.createElement('span');
-		const removeBtn = document.createElement('button');
-		
-		els.todoListWrap.classList.remove('invisible');
-		els.todoListWrap.appendChild(li);
-		li.setAttribute('data-id', todo.id);
-		li.appendChild(label);
-		
-		label.appendChild(checkbox);
 		checkbox.setAttribute('type', 'checkbox');
+		label.appendChild(checkbox);
 		checkbox.addEventListener('click', function () {
 			todo.completed = !todo.completed; // true <-> false 토글 가능하도록 NOT 연산자 사용
-			saveTodo(); // 로컬 스토리지에 저장
+			handlerList.saveTodo(); // 로컬 스토리지에 저장
 		});
-
 		// 새로고침해도 체크박스 데이터 유지하기 위한 조건문
 		if(!!todo.completed) {
 			checkbox.setAttribute('checked', 'checked');
 		} else {
 			checkbox.removeAttribute('checked');
 		}
-
-		label.appendChild(span);
-		span.innerText = todo.text;
-		li.appendChild(removeBtn);
 		
+		const span = document.createElement('span');
+		span.innerText = todo.text;
+		label.appendChild(span);
+
+		const removeBtn = document.createElement('button');
 		removeBtn.setAttribute('class', 'fa-solid fa-trash'); // 폰트어썸 아이콘 적용에 필요한 클래스 추가
 		removeBtn.addEventListener('click', handlerList.removeTodo);
+		todoItem.appendChild(removeBtn);
+		// const todoListTemplate =
+		// `<li class="todo-item" data-id=${todo.id}>
+		// 	<label>
+		// 	<input type="checkbox">
+		// 		<span>${todo.text}</span>
+		// 	</label>
+		// 	<button class="fa-solid fa-trash"><span class="blind">삭제 버튼</span></button>
+		// </li>`;
+		// els.todoList.insertAdjacentHTML('beforeend',todoListTemplate);
+		
+		// const todoListEls = document.querySelectorAll('.todo-item');
+		// const checkboxEls = document.querySelectorAll('.todo-list input[type="checkbox"]');
+		// const checkboxEl = document.querySelector('.todo-list input[type="checkbox"]');
+		// todoListEls.forEach(function(todoListEl) {
+		// 	todoListEl.addEventListener('click', function() {
+		// 		console.log('hello')
+		// 	})
+		// })
 	},
 	removeTodo: function(event) {
-		const todoList = event.target.parentElement;
-		const newTodo = todosArr.filter((todo) => todo.id != todoList.getAttribute('data-id')); //클릭한 요소의 id와 값이 불일치하는 데이터를 모아 새로운 배열 반환
+		const targetItem = event.target.parentElement;
+		const newTodosArr = todosArr.filter((todo) => todo.id != targetItem.getAttribute('data-id')); //클릭한 요소의 id와 값이 불일치하는 데이터를 모아 새로운 배열 반환
 
-		todoList.remove(); // 클릭한 todoList 삭제
-		todosArr = newTodo;
+		targetItem.remove(); // 클릭한 todoList 삭제
+		todosArr = newTodosArr;
 		handlerList.informTodo();
-		saveTodo(); // 로컬 스토리지에 저장
+		handlerList.saveTodo(); // 로컬 스토리지에 저장
 	},
 	clearAllTodo: function() {
-		if(!!els.todoListWrap.hasChildNodes()) { // 자식요소가 있다면 (아무 때나 다 지우면 안되기 때문에 조건 걸기)
-			els.todoListWrap.replaceChildren(); // 인자 값 지정하지 않으면 모든 자식 노드를 비워줌
+		if(!!els.todoList.hasChildNodes()) { // 자식요소가 있다면 (아무 때나 다 지우면 안되기 때문에 조건 걸기)
+			els.todoList.replaceChildren(); // 인자 값 지정하지 않으면 모든 자식 노드를 비워줌
 		}
 		localStorage.clear(); // 로컬스토리지의 모든 데이터 삭제
 		todosArr = []; // 배열 빈 값 할당
 		handlerList.informTodo();
-	} 
+	}
 };
 
 const checkSavedTodosArr = function() {
