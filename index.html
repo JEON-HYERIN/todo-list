@@ -22,15 +22,19 @@
 						<button type="button" class="btn todo-btn">Add</button>
 					</div>
 					<ul class="todo-list">
-						<template id="template">
+						<!-- template 생성: 페이지가 로드 될 때 렌더링되지 않고 자바스크립트를 이용하여 HTML을 표현해주는 태그 -->
+						<template id="todo-item-template">
 							<li class="todo-item">
 								<label>
-									<input type="checkbox">
+									<input type="checkbox" class="todo-check" />
 									<span></span>
 								</label>
-								<button type="button" class="remove-btn fa-solid fa-trash"></button>
+								<button type="button" class="remove-btn fa-solid fa-trash">
+									<span class="blind">삭제 버튼</span>
+								</button>
 							</li>
 						</template>
+						<!-- //template -->
 					</ul>
 					<div class="todo-info-area">
 						<p class="todo-info">You have <span class="todo-total"></span> pending tasks</p>

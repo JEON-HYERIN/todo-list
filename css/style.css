@@ -121,17 +121,12 @@ body {
 	border-top: 1px solid #e5e4e4;
 }
 
-.todo-list input:checked+span {
-	text-decoration: line-through;
-	text-decoration-color: #3da5f4;
-}
-
 .todo-list label {
 	position: relative;
 	cursor: pointer;
 }
 
-.todo-list input[type="checkbox"] {
+.todo-check {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -139,12 +134,12 @@ body {
 	pointer-events: none;
 }
 
-.todo-list input[type="checkbox"] + span {
+.todo-check + span {
 	position: relative;
 	padding-left: 32px;
 }
 
-.todo-list input[type="checkbox"] + span::before {
+.todo-check + span::before {
 	content: '';
 	position: absolute;
 	top: 50%;
@@ -158,14 +153,19 @@ body {
 	cursor: pointer;
 }
 
-.todo-list input[type="checkbox"]:checked + span::before {
+.todo-check:checked + span {
+	text-decoration: line-through;
+	text-decoration-color: #3da5f4;
+}
+
+.todo-check:checked + span::before {
 	content: "\f00c";
 	font-family: "Font Awesome 5 Free";
 	font-weight: 900;
 	color: #405189;
 }
 
-.todo-list input[type="checkbox"]:focus-visible + span::before {
+.todo-check:focus-visible + span::before {
 	outline: 2px solid #000;
 }
 
