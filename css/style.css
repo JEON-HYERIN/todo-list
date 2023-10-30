@@ -183,3 +183,7 @@ body {
 	justify-content: space-between;
 	align-items: center;
 }
+
+.todo-info {
+	font-size: 14px;
+}
