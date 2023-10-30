@@ -69,47 +69,8 @@ const handlerList = {
 			todoItemText.innerText = todo.text;
 			todoRemoveBtn.addEventListener('click', handlerList.removeTodo);
 		}
-
-		// const todoItem = document.createElement('li');
-		// todoItem.setAttribute('class', 'todo-item');
-		// todoItem.setAttribute('data-id', todo.id);
-		// els.todoList.appendChild(todoItem);
-
-		// const label = document.createElement('label');
-		// todoItem.appendChild(label);
-		
-		// const checkbox = document.createElement('input');
-		// checkbox.setAttribute('type', 'checkbox');
-		// label.appendChild(checkbox);
-		// todoCheckBox.addEventListener('click', function () {
-		// 	todo.completed = !todo.completed; // true <-> false 토글 가능하도록 NOT 연산자 사용
-		// 	handlerList.saveTodo(); // 로컬 스토리지에 저장
-		// });
-		// 새로고침해도 체크박스 데이터 유지하기 위한 조건문
-		// if(todo.completed) {
-		// 	todoCheckBox.setAttribute('checked', 'checked');
-		// } else {
-		// 	todoCheckBox.removeAttribute('checked');
-		// }
-		
-		// const span = document.createElement('span');
-		// todoItemText.innerText = todo.text;
-		// label.appendChild(span);
-
-		// const removeBtn = document.createElement('button');
-		// removeBtn.setAttribute('class', 'remove-btn fa-solid fa-trash'); // 폰트어썸 아이콘 적용에 필요한 클래스 추가
-		// todoRemoveBtn.addEventListener('click', handlerList.removeTodo);
-		// todoItem.appendChild(removeBtn);
 	},
 	removeTodo: function() {
-		// const targetItem = event.target.parentElement;
-		// const newTodosArr = todosArr.filter((todo) => todo.id != targetItem.getAttribute('data-id')); //클릭한 요소의 id와 값이 불일치하는 데이터를 모아 새로운 배열 반환
-
-		// targetItem.remove(); // 클릭한 todoList 삭제
-		// todosArr = newTodosArr;
-		// handlerList.informTodo();
-		// handlerList.saveTodo(); // 로컬 스토리지에 저장
-
 		// 새로운 배열 반환 하는 filter -> 해당 index 배열에서 삭제하는 splice로 방식 변경(문제점: 두 번 클릭해야 이벤트 실행됨, 해결방법 못찾음)
 		const removeBtnEls = document.querySelectorAll('.todo-item button');
 		removeBtnEls.forEach(function(removeBtnEl, index) {
@@ -120,6 +81,15 @@ const handlerList = {
 				handlerList.informTodo();
 			});
 		});
+		/* 기존 filter 방식의 코드
+		const targetItem = event.target.parentElement;
+		const newTodosArr = todosArr.filter((todo) => todo.id != targetItem.getAttribute('data-id')); //클릭한 요소의 id와 값이 불일치하는 데이터를 모아 새로운 배열 반환
+
+		targetItem.remove(); // 클릭한 todoList 삭제
+		todosArr = newTodosArr;
+		handlerList.informTodo();
+		handlerList.saveTodo(); // 로컬 스토리지에 저장
+		*/
 	},
 	clearAllTodo: function() {
 		if(els.todoList.hasChildNodes()) { // 자식요소가 있다면 (아무 때나 다 지우면 안되기 때문에 조건 걸기)
