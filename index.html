@@ -21,10 +21,20 @@
 						<input type="text" class="todo-input" placeholder="What do you need to do today?" />
 						<button type="button" class="btn todo-btn">Add</button>
 					</div>
-					<ul class="todo-list"></ul>
+					<ul class="todo-list">
+						<template id="template">
+							<li class="todo-item">
+								<label>
+									<input type="checkbox">
+									<span></span>
+								</label>
+								<button type="button" class="remove-btn fa-solid fa-trash"></button>
+							</li>
+						</template>
+					</ul>
 					<div class="todo-info-area">
 						<p class="todo-info">You have <span class="todo-total"></span> pending tasks</p>
-						<button type="button" class="todo-clear-btn">Clear All</button>
+						<button type="button" class="clear-btn">Clear All</button>
 					</div>
 				</div>
 			</div>
