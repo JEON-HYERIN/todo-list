@@ -114,7 +114,7 @@
 		}
 	}
 	
-	let init = function() {
+	const init = function() {
 		setElements();
 		bindEvents();
 		checkSavedTodosArr();
