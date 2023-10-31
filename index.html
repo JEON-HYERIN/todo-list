@@ -17,12 +17,12 @@
 			<div class="content">
 				<!-- To Do List -->
 				<div class="todo">
-					<div class="todo-form">
-						<input type="text" class="todo-input" placeholder="What do you need to do today?" />
-						<button type="button" class="btn todo-btn">Add</button>
-					</div>
+					<form class="todo-form">
+						<input type="text" class="todo-input" placeholder="What do you need to do today?" required />
+						<button type="submit" class="btn todo-btn">Add</button>
+					</form>
 					<ul class="todo-list">
-						<!-- template 생성: 페이지가 로드 될 때 렌더링되지 않고 자바스크립트를 이용하여 HTML을 표현해주는 태그 -->
+						<!-- template -->
 						<template id="todo-item-template">
 							<li class="todo-item">
 								<label>
@@ -37,8 +37,8 @@
 						<!-- //template -->
 					</ul>
 					<div class="todo-info-area">
-						<p class="todo-info">You have <span class="todo-total"></span> pending tasks</p>
-						<button type="button" class="clear-btn">Clear All</button>
+						<p class="todo-info">You have <span class="todo-total">0</span> pending tasks</p>
+						<button type="button" class="btn clear-btn">Clear All</button>
 					</div>
 				</div>
 			</div>
