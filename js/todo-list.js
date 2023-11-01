@@ -52,9 +52,9 @@ const todo = (function() {
 			todosArr.push(todosObj); // 입력받은 값을 todosArr 배열에 추가
 			todoHandler.save(); // 로컬 스토리지에 저장
 			todoHandler.countTotal();
-			todoHandler.paint(todosObj); // 입력한 투두 리스트를 화면에 보여주는 함수 실행
+			todoHandler.display(todosObj); // 입력한 투두 리스트를 화면에 보여주는 함수 실행
 		},
-		paint: function(todo) {
+		display: function(todo) {
 			if ("content" in document.createElement("template")) {
 				const todoItemTemplate = document.querySelector('#todo-item-template');
 				const todoItemClone = document.importNode(todoItemTemplate.content, true); // importNode를 통해서 template 안쪽 내용 복사(자식노드를 전부 포함해서)
@@ -104,7 +104,7 @@ const todo = (function() {
 			if (savedTodosArr !== null) {
 				const paresdTodosArr = JSON.parse(savedTodosArr); // 문자열로 저장된 데이터를 기존의 원본 데이터로 변환
 				todosArr = paresdTodosArr; // 기존에 저장되어 있던 값을 todosArr 배열에 추가
-				paresdTodosArr.forEach(todoHandler.paint); // 배열 반복문 실행해서 화면에 출력
+				paresdTodosArr.forEach(todoHandler.display); // 배열 반복문 실행해서 화면에 출력
 				todoHandler.countTotal();
 			}
 		}
