@@ -24,10 +24,13 @@ const todo = (function() {
 	const bindEvents = function() {
 		els.todoForm.addEventListener('submit', todoHandler.create);
 		els.todoClearBtn.addEventListener('click', todoHandler.clearAll);
-		els.section.addEventListener('click', function(event) { // 이벤트 위임
-			if(event.target.classList.contains('remove-btn')) {
-				todoHandler.remove(event);
+		els.section.addEventListener('click', function(event) { // 이벤트 위임 활용
+			if(event.target.classList.contains('todo-check')) {
+				todoHandler.checkCompleted(event);
 			}
+			else if(event.target.classList.contains('remove-btn')) {
+				todoHandler.remove(event);
+			} 
 		});
 	};
 	
@@ -73,12 +76,17 @@ const todo = (function() {
 				} else {
 					todoCheckBox.removeAttribute('checked');
 				}
-	
-				todoCheckBox.addEventListener('click', function () {
+			}
+		},
+		checkCompleted: function(event) {
+			const targetItem = event.target.parentElement.parentElement;
+
+			todosArr.forEach(function(todo) {
+				if(todo.id == targetItem.getAttribute('data-id')) {
 					todo.completed = !todo.completed; // true <-> false 토글 가능하도록 NOT 연산자 사용
 					todoHandler.save(); // 로컬 스토리지에 저장
-				});
-			}
+				}
+			});
 		},
 		remove: function(event) {
 			const targetItem = event.target.parentElement;
