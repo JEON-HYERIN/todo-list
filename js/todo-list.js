@@ -82,7 +82,7 @@ const todo = (function() {
 			const targetTodoItem = event.target.parentElement.parentElement;
 
 			todosArr.forEach(function(todo) {
-				if(todo.id == targetTodoItem.getAttribute('data-id')) {
+				if(todo.id == targetTodoItem.dataset.id) {
 					todo.completed = !todo.completed; // true <-> false 토글 가능하도록 NOT 연산자 사용
 					todoHandler.save(); // 로컬 스토리지에 저장
 				}
@@ -90,7 +90,7 @@ const todo = (function() {
 		},
 		remove: function(event) {
 			const targetTodoItem = event.target.parentElement;
-			const newTodosArr = todosArr.filter((todo) => todo.id != targetTodoItem.getAttribute('data-id')); //클릭한 요소의 id와 값이 불일치하는 데이터를 모아 새로운 배열 반환
+			const newTodosArr = todosArr.filter((todo) => todo.id != targetTodoItem.dataset.id); //클릭한 요소의 id와 값이 불일치하는 데이터를 모아 새로운 배열 반환
 	
 			targetTodoItem.remove(); // 클릭한 todoList 삭제
 			todosArr = newTodosArr;
