@@ -28,9 +28,10 @@ const todo = (function() {
 			if(event.target.classList.contains('todo-check')) {
 				todoHandler.checkCompletion(event);
 			}
-			else if(event.target.classList.contains('remove-btn')) {
+
+			if(event.target.classList.contains('remove-btn')) {
 				todoHandler.remove(event);
-			} 
+			}
 		});
 	};
 	
@@ -69,6 +70,7 @@ const todo = (function() {
 				todoItemText.innerText = todo.text;
 				els.todoList.appendChild(todoItemClone);
 				todoHandler.countTotal();
+				todoHandler.accessibility();
 	
 				// 새로고침해도 체크박스 데이터 유지하기 위한 조건문
 				if(todo.completed) {
@@ -96,24 +98,40 @@ const todo = (function() {
 			todosArr = newTodosArr;
 			todoHandler.save(); // 로컬 스토리지에 저장
 			todoHandler.countTotal();
+			todoHandler.accessibility();
 		},
 		clearAll: function() {
 			// 자식요소가 있다면 해당 조건문 실행(아무 때나 다 지우면 안되기 때문에 조건 걸기)
 			if(els.todoList.hasChildNodes()) {
 				els.todoList.replaceChildren(); // 인자 값 지정하지 않으면 모든 자식 노드를 비워줌
 			}
+			
 			localStorage.clear(); // 로컬스토리지의 모든 데이터 삭제
 			todosArr = []; // 배열 빈 값 할당
 			todoHandler.save();
 			todoHandler.countTotal();
+			todoHandler.accessibility();
 		},
 		checkSavedTodosArr: function() {
 			// 로컬 스토리지에 저장되어 있는 값이 있다면 해당 조건문 실행
 			if (savedTodosArr !== null) {
 				const paresdTodosArr = JSON.parse(savedTodosArr); // 문자열로 저장된 데이터를 기존의 원본 데이터로 변환
+
 				todosArr = paresdTodosArr; // 기존에 저장되어 있던 값을 todosArr 배열에 추가
 				paresdTodosArr.forEach(todoHandler.display); // 배열 반복문 실행해서 화면에 출력
 				todoHandler.countTotal();
+				todoHandler.accessibility();
+			}
+		},
+		accessibility: function() {
+			const todoItemEls = document.querySelectorAll('.todo-item');
+
+			if(els.todoList.childElementCount > 1) {
+				els.todoList.setAttribute('role', 'list');
+				todoItemEls.forEach((liEl) => liEl.setAttribute('role', 'listitem'));
+			} else {
+				els.todoList.removeAttribute('role');
+				todoItemEls.forEach((liEl) => liEl.removeAttribute('role'));
 			}
 		}
 	};
