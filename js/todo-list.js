@@ -79,20 +79,20 @@ const todo = (function() {
 			}
 		},
 		checkCompletion: function(event) {
-			const targetItem = event.target.parentElement.parentElement;
+			const targetTodoItem = event.target.parentElement.parentElement;
 
 			todosArr.forEach(function(todo) {
-				if(todo.id == targetItem.getAttribute('data-id')) {
+				if(todo.id == targetTodoItem.getAttribute('data-id')) {
 					todo.completed = !todo.completed; // true <-> false 토글 가능하도록 NOT 연산자 사용
 					todoHandler.save(); // 로컬 스토리지에 저장
 				}
 			});
 		},
 		remove: function(event) {
-			const targetItem = event.target.parentElement;
-			const newTodosArr = todosArr.filter((todo) => todo.id != targetItem.getAttribute('data-id')); //클릭한 요소의 id와 값이 불일치하는 데이터를 모아 새로운 배열 반환
+			const targetTodoItem = event.target.parentElement;
+			const newTodosArr = todosArr.filter((todo) => todo.id != targetTodoItem.getAttribute('data-id')); //클릭한 요소의 id와 값이 불일치하는 데이터를 모아 새로운 배열 반환
 	
-			targetItem.remove(); // 클릭한 todoList 삭제
+			targetTodoItem.remove(); // 클릭한 todoList 삭제
 			todosArr = newTodosArr;
 			todoHandler.save(); // 로컬 스토리지에 저장
 			todoHandler.countTotal();
