@@ -26,7 +26,7 @@ const todo = (function() {
 		els.todoClearBtn.addEventListener('click', todoHandler.clearAll);
 		els.section.addEventListener('click', function(event) { // 이벤트 위임 활용
 			if(event.target.classList.contains('todo-check')) {
-				todoHandler.checkCompleted(event);
+				todoHandler.checkCompletion(event);
 			}
 			else if(event.target.classList.contains('remove-btn')) {
 				todoHandler.remove(event);
@@ -78,7 +78,7 @@ const todo = (function() {
 				}
 			}
 		},
-		checkCompleted: function(event) {
+		checkCompletion: function(event) {
 			const targetItem = event.target.parentElement.parentElement;
 
 			todosArr.forEach(function(todo) {
