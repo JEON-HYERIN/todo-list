@@ -140,4 +140,5 @@ const todo = (function() {
 		init: init
 	}
 })(); // 즉시 실행 함수 실행 (사용이유: 변수를 전역(global scope)으로 선언하는 것을 피하기 위해서)
+
 todo.init();
